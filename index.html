@@ -4,15 +4,48 @@
     <meta charset="UTF-8">
     <title>Tez Hotel</title>
     <link rel="stylesheet" href="css/style.css">
-    <form>
-        <input type="text" id="email" required/>
-        <input type="password" id="pass" required/>
-        <button id="login">Login</button>
+    <form id="login">
+        <input type="text" id="email" placeholder="Email" required/>
+        <input type="password" id="pass" placeholder="Password" required/>
+        <button id="submit">Login</button>
+        <input type="reset" id="reset" class="btn" value="Clear All">
     </form>
 </head>
 <body>
 </body>
 <script>
+    let form = document.getElementById("login")
+    let email = document.getElementById("email")
+    let pass = document.getElementById("pass")
+    let db;
 
+    window.onload = function() {
+        let request = window.indexedDB.open('TezDB', 1)
+        request.onerror = function() {
+        };
+        request.onsuccess = function() {
+            db = request.result;
+        };
+        form.onsubmit = login;
+        function login(e){
+            e.preventDefault()
+            let transaction = db.transaction(['users'], 'readonly');
+            let objectStore = transaction.objectStore('users');
+            let req = objectStore.get(email.value).onsuccess = function (e) {
+                let result = e.target.result
+                if (result !== undefined){
+                    if(pass.value === result.pass){
+                        alert("Login Success")
+                    }
+                    else{
+                        alert("Wrong Password")
+                    }
+                }
+                else {
+                    alert("Wrong Email")
+                }
+            }
+        }
+    }
 </script>
 </html>
