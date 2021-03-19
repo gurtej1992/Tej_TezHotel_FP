@@ -34,7 +34,8 @@
     let name = document.getElementById("name")
     let url = document.getElementById("personal")
     let comment = document.getElementById("comment")
-    let confirm = document.getElementById("confirmation").checked
+   // let confirm = document.getElementById("confirmation").checked
+    let confirm = true
     let doy = document.getElementById("doy")
     let gender = document.querySelector('input[name="gender"]:checked').value
     let db;
@@ -46,16 +47,26 @@
         dbReq.onupgradeneeded = function (event) {
             // Set the db variable to our database so we can use it!
             db = event.target.result;
-            let objectStore = db.createObjectStore('users', {keyPath: 'email'});
-            objectStore.createIndex('pass', 'pass', {unique: false});
-            objectStore.createIndex('name', 'name', {unique: false});
-            objectStore.createIndex('url', 'url', {unique: false});
-            objectStore.createIndex('doy', 'doy', {unique: false});
-            objectStore.createIndex('gender', 'gender', {unique: false});
-            objectStore.createIndex('comment', 'comment', {unique: false});
+            let storeUser = db.createObjectStore('users', {keyPath: 'email'});
+            storeUser.createIndex('pass', 'pass', {unique: false});
+            storeUser.createIndex('name', 'name', {unique: false});
+            storeUser.createIndex('url', 'url', {unique: false});
+            storeUser.createIndex('doy', 'doy', {unique: false});
+            storeUser.createIndex('gender', 'gender', {unique: false});
+            storeUser.createIndex('comment', 'comment', {unique: false});
+
+            let storeBooking = db.createObjectStore('booking',  { keyPath: 'booking_id', autoIncrement:true });
+            storeBooking.createIndex('email', 'email', { unique: false });
+            storeBooking.createIndex('name', 'name', { unique: false });
+            storeBooking.createIndex('from', 'from', { unique: false });
+            storeBooking.createIndex('to', 'to', { unique: false });
+            storeBooking.createIndex('room_type', 'room_type', { unique: false });
+            storeBooking.createIndex('adult', 'room_type', { unique: false });
+            storeBooking.createIndex('children', 'children', { unique: false });
         }
         dbReq.onsuccess = function (event) {
             db = event.target.result;
+            alert("Success")
         }
         dbReq.onerror = function (event) {
             alert('error opening database ' + event.target.errorCode);
@@ -74,7 +85,7 @@
                 }
                 let transaction = db.transaction(['users'], 'readwrite')
                 let objectStore = transaction.objectStore('users')
-                let request = objectStore.add(userData).onsuccess  = function () {
+                objectStore.add(userData).onsuccess  = function () {
                     alert("Registration Successful");
 
                     //window.location.href = "index.html";

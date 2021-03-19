@@ -7,7 +7,7 @@
 
 </head>
 <body>
-<form id="register">
+<form id="booking">
     <label for="from">From: </label>
     <input type="date" id="from" placeholder="From" required/><br><br>
     <label for="to">To: </label>
@@ -16,15 +16,15 @@
     <option value="Single room">Single room</option>
     <option value="Double room">Double room</option>
     </select>
-    <label for="adults">Adults</label>
-        <select id="adults" name="adults" class="form-control">
+    <label for="adult">Adults</label>
+        <select id="adult" name="adult">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
         </select>
     <label for="children">Children</label>
-        <select id="children" name="children" class="form-control">
+        <select id="children" name="children">
             <option value="-">-</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -40,4 +40,51 @@
     <button id="submit">Book</button>
 </form>
 </body>
+<script>
+    let form = document.getElementById("booking")
+    let email = document.getElementById("email")
+    let name = document.getElementById("name")
+    let from = document.getElementById("from")
+    let to = document.getElementById("to")
+    let adult = document.getElementById("adult")
+    let children = document.getElementById("children")
+    let db;
+
+    window.onload = function() {
+        let request = window.indexedDB.open('TezDB', 1)
+        request.onerror = function () {
+        };
+        request.onsuccess = function () {
+            db = request.result;
+        };
+        form.onsubmit = booking;
+
+        function booking(e) {
+            let bookingData = {
+                from: from.value,
+                to: to.value,
+                name: name.value,
+                email: email.value,
+                adult: adult.value,
+                children: children.value
+            }
+            let transaction = db.transaction(['booking'], 'readwrite')
+            let objectStore = transaction.objectStore('booking')
+            objectStore.add(bookingData).onsuccess  = function () {
+                alert("Book Successful");
+
+                //window.location.href = "index.html";
+
+            };
+            transaction.oncomplete = function () {
+                console.log('Transaction completed: database modification finished.');
+
+            };
+            transaction.onerror = function () {
+                console.log('Transaction not opened due to error');
+            };
+        }
+    }
+
+</script>
 </html>
