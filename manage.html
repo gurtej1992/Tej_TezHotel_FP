@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tez Hotel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="header">
+    <h1>Tez Hotel</h1>
+</div>
+<div class="row">
+    <div class="col-3 col-s-3 menu">
+        <ul>
+            <li>Home</li>
+            <a href="booking.html"><li>Book Room</li></a>
+            <a href="manage.html"><li>Manage Bookings</li></a>
+            <a href="index.html"><li>Logout</li></a>
+        </ul>
+    </div>
+    <div class="col-6 col-s-9">
+        <h2>Login</h2>
+        <div id="book"></div>
+    </div>
+    <div class="col-3 col-s-12">
+        <div class="aside">
+            <h2>What?</h2>
+            <p>Chania is a city on the island of Crete.</p>
+            <h2>Where?</h2>
+            <p>Crete is a Greek island in the Mediterranean Sea.</p>
+            <h2>How?</h2>
+            <p>You can reach Chania airport from all over Europe.</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; Copyright 2020, Tez Hotels</p>
+</div>
+
+</body>
+<script>
+    let hotellist = document.getElementById("book")
+    let db;
+
+    window.onload = function() {
+        let request = window.indexedDB.open('TezDB', 1)
+        request.onerror = function () {
+        };
+        request.onsuccess = function () {
+            db = request.result;
+        };
+
+        while (hotellist.firstChild) {
+            hotellist.removeChild(hotellist.firstChild);
+        }
+        let objectStore = db.transaction('booking').objectStore('booking');
+        objectStore.openCursor().onsuccess = function(e) {
+            let cursor = e.target.result;
+            if(cursor) {
+                const listItem = document.createElement('li');
+                const h3 = document.createElement('h3');
+                const para = document.createElement('p');
+
+                listItem.appendChild(h3);
+                listItem.appendChild(para);
+                hotellist.appendChild(listItem);
+                para.textContent = cursor.value.from +" ---> " + cursor.value.to;
+
+                h3.textContent = cursor.value.name + ", " + cursor.value.email;
+
+                listItem.setAttribute('booking_id', cursor.value.booking_id);
+
+                // Create a button and place it inside each listItem
+                const deleteBtn = document.createElement('button');
+                listItem.appendChild(deleteBtn);
+                deleteBtn.textContent = 'Delete';
+
+                // Set an event handler so that when the button is clicked, the deleteItem()
+                // function is run
+                //deleteBtn.onclick = deleteHotel;
+
+                // Iterate to the next item in the cursor
+                cursor.continue();
+            } else {
+
+                if(!hotellist.firstChild) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = 'No Hotel Bookings.'
+                    hotellist.appendChild(listItem);
+                }
+
+                console.log('All Hotel bookings displayed');
+            }
+        };
+    }
+
+</script>
+</html>

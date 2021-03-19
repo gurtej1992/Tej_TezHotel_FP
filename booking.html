@@ -4,41 +4,72 @@
     <meta charset="UTF-8">
     <title>Tez Hotel</title>
     <link rel="stylesheet" href="css/style.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<form id="booking">
-    <label for="from">From: </label>
-    <input type="date" id="from" placeholder="From" required/><br><br>
-    <label for="to">To: </label>
-    <input type="date" id="to" placeholder="To" required/><br><br>
-    <select id="room-type" name="room-type">
-    <option value="Single room">Single room</option>
-    <option value="Double room">Double room</option>
-    </select>
-    <label for="adult">Adults</label>
-        <select id="adult" name="adult">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-        </select>
-    <label for="children">Children</label>
-        <select id="children" name="children">
-            <option value="-">-</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-        </select>
-        <label for="name">Name</label>
-        <input id="name" name="name" class="form-control" type="text" placeholder="Name">
-        <label for="email">Email</label>
-    <input id="email" name="email" class="form-control" type="email" placeholder="Email">
-    <br><br>
-    <input type="reset" id="reset" class="btn" value="Clear All">
-    <button id="submit">Book</button>
-</form>
+<div class="header">
+    <h1>Tez Hotel</h1>
+</div>
+<div class="row">
+    <div class="col-3 col-s-3 menu">
+        <ul>
+            <li>Home</li>
+            <a href="booking.html"><li>Book Room</li></a>
+            <a href="manage.html"><li>Manage Bookings</li></a>
+            <a href="index.html"><li>Logout</li></a>
+        </ul>
+    </div>
+    <div class="col-6 col-s-9">
+        <h2>Login</h2>
+        <form id="booking">
+            <label for="from">From: </label>
+            <input type="date" id="from" placeholder="From" required/><br><br>
+            <label for="to">To: </label>
+            <input type="date" id="to" placeholder="To" required/><br><br>
+            <select id="room-type" name="room-type">
+                <option value="Single room">Single room</option>
+                <option value="Double room">Double room</option>
+            </select>
+            <label for="adult">Adults</label>
+            <select id="adult" name="adult">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <label for="children">Children</label>
+            <select id="children" name="children">
+                <option value="-">-</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <label for="name">Name</label>
+            <input id="name" name="name" class="form-control" type="text" placeholder="Name">
+            <label for="email">Email</label>
+            <input id="email" name="email" class="form-control" type="email" placeholder="Email">
+            <br><br>
+            <input type="reset" id="reset" class="btn" value="Clear All">
+            <button id="submit">Book</button>
+        </form>
+    </div>
+    <div class="col-3 col-s-12">
+        <div class="aside">
+            <h2>What?</h2>
+            <p>Chania is a city on the island of Crete.</p>
+            <h2>Where?</h2>
+            <p>Crete is a Greek island in the Mediterranean Sea.</p>
+            <h2>How?</h2>
+            <p>You can reach Chania airport from all over Europe.</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; Copyright 2020, Tez Hotels</p>
+</div>
+
 </body>
 <script>
     let form = document.getElementById("booking")

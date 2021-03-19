@@ -4,14 +4,46 @@
     <meta charset="UTF-8">
     <title>Tez Hotel</title>
     <link rel="stylesheet" href="css/style.css">
-    <form id="login">
-        <input type="text" id="email" placeholder="Email" required/>
-        <input type="password" id="pass" placeholder="Password" required/>
-        <button id="submit">Login</button>
-        <input type="reset" id="reset" class="btn" value="Clear All">
-    </form>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<div class="header">
+    <h1>Tez Hotel</h1>
+</div>
+<div class="row">
+    <div class="col-3 col-s-3 menu">
+        <ul>
+            <a href="index.html"><li>Home</li></a>
+            <a href="registration.html"><li>Registration</li></a>
+            <li>Login</li>
+            <li>Contact Us</li>
+        </ul>
+    </div>
+    <div class="col-6 col-s-9">
+        <h2>Login</h2>
+        <form id="login">
+            <input type="text" id="email" placeholder="Email" required/>
+            <input type="password" id="pass" placeholder="Password" required/>
+            <button id="submit">Login</button>
+            <input type="reset" id="reset" class="btn" value="Clear All">
+        </form>
+    </div>
+    <div class="col-3 col-s-12">
+        <div class="aside">
+            <h2>What?</h2>
+            <p>Chania is a city on the island of Crete.</p>
+            <h2>Where?</h2>
+            <p>Crete is a Greek island in the Mediterranean Sea.</p>
+            <h2>How?</h2>
+            <p>You can reach Chania airport from all over Europe.</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; Copyright 2020, Tez Hotels</p>
+</div>
+
 </body>
 <script>
     let form = document.getElementById("login")
