@@ -69,6 +69,8 @@
                 if (result !== undefined){
                     if(pass.value === result.pass){
                         alert("Login Success")
+                        localStorage.setItem("currentUser",email.value);
+                        localStorage.setItem("currentUserName",result.name)
                         window.location.href = "booking.html";
                     }
                     else{

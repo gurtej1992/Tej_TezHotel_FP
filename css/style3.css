@@ -14,7 +14,7 @@ h4,
 h5,
 h6 {
     font-family: "Baskervville", serif;
-    color: #191514;
+    color: #fff;
     margin-top: 0px;
     font-style: normal;
     font-weight: 500;
@@ -105,12 +105,12 @@ html {
 }
 
 .header {
-    background-color: #dc9453;
+    background-color: #1d1d1d;
     color: #ffffff;
     padding: 15px;
 }
 .header h1 {
-    background-color: #dc9453;
+    background-color: #1d1d1d;
     color: #ffffff;
 }
 
@@ -123,12 +123,12 @@ html {
 .menu li {
     padding: 8px;
     margin-bottom: 7px;
-    background-color: #9bc3ea;
+    background-color: #1d1d1d;
     color: #ffffff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .text{
-    color: #000;
+    color: #fff;
 }
 
 .menu li:hover {
@@ -136,7 +136,7 @@ html {
 }
 
 .aside {
-    background-color: #9bc3ea;
+    background-color: #1d1d1d;
     padding: 15px;
     color: #ffffff;
     text-align: center;
@@ -145,7 +145,7 @@ html {
 }
 
 .footer {
-    background-color: #dc9453;
+    background-color: #ec62e4;
     color: #ffffff;
     text-align: center;
     font-size: 12px;

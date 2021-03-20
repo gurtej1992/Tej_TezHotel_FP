@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-3 col-s-3 menu">
         <ul>
-            <li>Home</li>
+            <li>Welcome <script>document.write(localStorage.getItem("currentUserName"))</script></li>
             <a href="booking.html"><li>Book Room</li></a>
             <a href="manage.html"><li>Manage Bookings</li></a>
             <a href="index.html"><li>Logout</li></a>
@@ -47,11 +47,6 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
             </select>
-            <label for="name">Name</label>
-            <input id="name" name="name" class="form-control" type="text" placeholder="Name">
-            <label for="email">Email</label>
-            <input id="email" name="email" class="form-control" type="email" placeholder="Email">
-            <br><br>
             <input type="reset" id="reset" class="btn" value="Clear All">
             <button id="submit">Book</button>
         </form>
@@ -74,9 +69,13 @@
 
 </body>
 <script>
+    if(localStorage.getItem("currentUser") === null){
+        alert("You have to login")
+        window.location.href = "index.html";
+    }
     let form = document.getElementById("booking")
-    let email = document.getElementById("email")
-    let name = document.getElementById("name")
+    let email = localStorage.getItem("currentUser")
+    let name = localStorage.getItem("currentUserName")
     let from = document.getElementById("from")
     let to = document.getElementById("to")
     let adult = document.getElementById("adult")
@@ -96,8 +95,8 @@
             let bookingData = {
                 from: from.value,
                 to: to.value,
-                name: name.value,
-                email: email.value,
+                name: name,
+                email: email,
                 adult: adult.value,
                 children: children.value
             }
@@ -106,7 +105,7 @@
             objectStore.add(bookingData).onsuccess  = function () {
                 alert("Book Successful");
 
-                //window.location.href = "index.html";
+                window.location.href = "manage.html";
 
             };
             transaction.oncomplete = function () {
